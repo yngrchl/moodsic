@@ -1,19 +1,10 @@
 import Head from 'next/head'
 import LoginButton from '../components/LoginButton'
-import { prefix } from '../utils/prefix';
 
 /**
  * Home/login page
  */
-
 const Home = () => {
-  const githubImgSrc = () => {
-    if (prefix === "") {
-      return "Github-Mark-32px.png";
-    }
-    return `${prefix}/public/Github-Mark-32px.png`;
-  };
-
   return (
     <div className="container">
       <Head>
@@ -57,7 +48,7 @@ const Home = () => {
         <p>source code at</p>{" "}
         <a href="https://github.com/yngrchl/moodsic">
           <img
-            src={githubImgSrc()}
+            src="github-icon.png"
             alt="Github logo"
           />
         </a>
