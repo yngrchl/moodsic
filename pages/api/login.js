@@ -6,6 +6,11 @@ import spotifyWebApi from "spotify-web-api-node";
  * so we can personalize search results.
  */
 const login = async (req, res) => {
+  if (req.method !== "POST") {
+    res.status(400).send({ message: "Only POST requests allowed" });
+    return;
+  }
+
   const credentials = {
     clientId: process.env.SPOTIFY_CLIENT_ID,
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
