@@ -27,6 +27,7 @@ footer {
 
 footer img {
     margin-left: 0.5rem;
+    height: 1rem;
 }
 
 footer a {
@@ -57,6 +58,12 @@ a {
     font-size: 4rem;
 }
 
+.title img {
+    width: 5rem;
+    display: block;
+    margin: auto;
+}
+
 .title,
 .description {
     text-align: center;
@@ -65,6 +72,12 @@ a {
 .description {
     line-height: 1.5;
     font-size: 1.5rem;
+}
+
+.prompt {
+    line-height: 1.5;
+    font-size: 1.5rem;
+    color: grey;
 }
 
 code {
@@ -114,10 +127,6 @@ code {
     margin: 0;
     font-size: 1.25rem;
     line-height: 1.5;
-}
-
-.logo {
-    height: 1em;
 }
 
 @media (max-width: 600px) {

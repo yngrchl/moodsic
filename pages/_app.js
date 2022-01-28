@@ -1,6 +1,13 @@
-import './styles.scss'
+// import { SpotifyWrapper } from "../contexts/spotifyContext";
+import "./styles.modules.scss";
 
 // This default export is required in a new `pages/_app.js` file.
-export default function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+const App = ({ Component, pageProps }) => {
+  return (
+    // <SpotifyWrapper>
+      <Component {...pageProps} />
+    // </SpotifyWrapper>
+  );
 }
+
+export default App;
