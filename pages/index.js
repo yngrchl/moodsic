@@ -1,5 +1,7 @@
 import Head from 'next/head'
-import LoginButton from '../components/LoginButton'
+import Footer from '../components/Footer'
+import { loginUrl } from "../utils/spotify";
+import Button from '../components/Button/Button';
 
 /**
  * Home/login page
@@ -41,18 +43,10 @@ const Home = () => {
           />
           moodsic
         </h1>
-        <LoginButton />
+        <Button href={loginUrl} text="LOG IN WITH SPOTIFY" type="login" />
       </main>
 
-      <footer>
-        <p>source code at</p>{" "}
-        <a href="https://github.com/yngrchl/moodsic">
-          <img
-            src="github-icon.png"
-            alt="Github logo"
-          />
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 }

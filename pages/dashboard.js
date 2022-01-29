@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { prefix } from '../utils/prefix';
 
-
 /**
  * Post login page
  */
@@ -26,8 +25,8 @@ const Dashboard = () => {
         setAccessToken(response.data.accessToken);
       })
       .catch(() => {
-        //   If failed, redirect to Home/Login page
-        window.location = `${prefix}/`;
+        //   If failed, show Error page
+        window.location = `${prefix}/error`;
       });
   }, [code]);
 

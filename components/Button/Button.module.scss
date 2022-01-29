@@ -1,0 +1,46 @@
+.btn {
+    margin-top: 5rem;
+    border-radius: 4rem;
+    padding: 1rem 2rem;
+    border: 1px solid white;
+
+    &.login {
+      background-color: #1DB954;
+    }
+
+    &.error {
+      background-color: #ea481eff;
+    }
+}
+
+.btn h4 {
+  margin: 0;
+}
+
+.btn {
+  &.login, &.error {
+    h4 {
+      color: white;
+    }
+  }
+}
+
+.btn:hover,
+.btn:focus,
+.btn:active {
+  &.login {
+    h4 {
+      color: #0d5a28;
+    }
+
+    border-color: #0d5a28;
+  }
+
+  &.error {
+    h4 {
+      color: #a01d1d;
+    }
+
+    border-color: #a01d1d;
+  }
+}
