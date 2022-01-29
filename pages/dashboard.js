@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SpotifyWebApi from "spotify-web-api-node";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Footer from '../components/Footer';
 import { prefixPath } from '../utils/prefix';
 
 /**
@@ -55,8 +56,12 @@ const Dashboard = () => {
   }, [accessToken]);
 
   return (
-    <div>
-      user display name: {userProfileData?.display_name}
+    <div className="container">
+      <main>
+        user display name: {userProfileData?.display_name}
+      </main>
+
+      <Footer />
     </div>
   );
 }
