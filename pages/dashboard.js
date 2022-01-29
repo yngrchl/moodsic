@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SpotifyWebApi from "spotify-web-api-node";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { prefix } from '../utils/prefix';
+import { prefixPath } from '../utils/prefix';
 
 /**
  * Post login page
@@ -16,22 +16,22 @@ const Dashboard = () => {
     if (!code) return;
 
     axios
-      .post(`${prefix}/api/login`, { code })
+      .post(prefixPath("/api/login"), { code })
       .then((response) => {
         // If successful, remove code string from URL
         // and return accessToken
-        window.history.pushState({}, null, `${prefix}/dashboard`);
+        window.history.pushState({}, null, prefixPath("/dashboard"));
 
         setAccessToken(response.data.accessToken);
       })
       .catch(() => {
         //   If failed, show Error page
-        window.location = `${prefix}/error`;
+        window.location = prefixPath("/error");
       });
   }, [code]);
 
   const spotifyApi = new SpotifyWebApi({
-    clientId: process.env.SPOTIFY_CLIENT_ID,
+    clientId: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID,
   });
 
   const { query } = useRouter();

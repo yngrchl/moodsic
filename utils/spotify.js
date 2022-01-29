@@ -2,8 +2,8 @@
  * Build Spotify login URL
  */
 const authEndpoint = "https://accounts.spotify.com/authorize";
-const redirectUri = process.env.SPOTIFY_REDIRECT_URI;
-const clientId = process.env.SPOTIFY_CLIENT_ID;
+const redirectUri = process.env.NEXT_PUBLIC_SPOTIFY_REDIRECT_URI;
+const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
 
 const scopes = [
   "playlist-modify-private",

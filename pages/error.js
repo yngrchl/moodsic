@@ -1,5 +1,6 @@
 import Button from '../components/Button/Button';
-import Footer from '../components/Footer'
+import Footer from '../components/Footer';
+import { prefixPath } from '../utils/prefix';
 
 /**
  * Error page
@@ -14,7 +15,7 @@ const Error = () => (
         />
         oops, something went wrong.
       </h1>
-      <Button href="/" text="TRY AGAIN FROM THE BEGINNING" type="error" />
+      <Button href={prefixPath("/")} text="TRY AGAIN FROM THE BEGINNING" type="error" />
     </main>
 
     <Footer />
