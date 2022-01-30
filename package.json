@@ -4,6 +4,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test": "jest",
     "export": "next export"
   },
   "dependencies": {
@@ -19,7 +20,9 @@
     "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
+    "jest": "^27.4.7",
     "plop": "^3.0.5"
   }
 }

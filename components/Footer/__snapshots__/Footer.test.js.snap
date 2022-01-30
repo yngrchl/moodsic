@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer renders Footer unchanged 1`] = `
+<div>
+  <footer>
+    <p>
+      source code at
+    </p>
+     
+    <a
+      href="https://github.com/yngrchl/moodsic"
+    >
+      <img
+        alt="Github logo"
+        src="github-icon.png"
+      />
+    </a>
+  </footer>
+</div>
+`;

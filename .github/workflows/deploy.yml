@@ -32,6 +32,8 @@ jobs:
           NEXT_PUBLIC_SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
           NEXT_PUBLIC_SPOTIFY_REDIRECT_URI: ${{ secrets.SPOTIFY_REDIRECT_URI }}
+      - name: Run tests
+        run: npm run test
       - name: Export static files
         run: npm run export
       - name: Add .nojekyll file
