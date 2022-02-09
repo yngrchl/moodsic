@@ -3,6 +3,7 @@ import SpotifyWebApi from "spotify-web-api-node";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Footer from '../components/Footer';
+import Link from 'next/link';
 import { prefixPath } from '../utils/prefix';
 
 /**
@@ -58,7 +59,9 @@ const Dashboard = () => {
   return (
     <div className="container">
       <main>
-        user display name: {userProfileData?.display_name}
+        <Link href="/blah">
+          <a>About You</a>
+        </Link>
       </main>
 
       <Footer />

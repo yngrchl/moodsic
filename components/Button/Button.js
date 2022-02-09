@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from "classnames/bind";
 import styles from './Button.module.scss';
+import Link from 'next/link';
 
 /**
  * Generic button
@@ -13,9 +14,11 @@ const Button = ({ href, text, type }) => {
   const cx = classNames.bind(styles);
 
   return(
-  <a href={href} className={cx('btn', type)}>
-    <h4>{text}</h4>
-  </a>
+    <Link href={href}>
+      <a className={cx('btn', type)}>
+        <h4>{text}</h4>
+      </a>
+    </Link>
 )};
 
 Button.defaultProps = {

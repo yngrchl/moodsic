@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 /**
  * Footer at bottom of each page
@@ -6,9 +7,11 @@ import React from 'react';
 const Footer = () => (
   <footer>
     <p>source code at</p>{" "}
-    <a href="https://github.com/yngrchl/moodsic">
-      <img src="github-icon.png" alt="Github logo" />
-    </a>
+    <Link href="https://github.com/yngrchl/moodsic">
+      <a>
+        <img src="github-icon.png" alt="Github logo" />
+      </a>
+    </Link>
   </footer>
 );
 
