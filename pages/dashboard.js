@@ -5,6 +5,7 @@ import axios from "axios";
 import Footer from '../components/Footer';
 import Link from 'next/link';
 import { prefixPath } from '../utils/prefix';
+import { useSpotifyContext } from "../contexts/spotifyContext";
 
 /**
  * Post login page
@@ -12,7 +13,7 @@ import { prefixPath } from '../utils/prefix';
 const Dashboard = () => {
   const [code, setCode] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
-  const [userProfileData, setUserProfileData] = useState();
+  const [_, setSpotifyUserData] = useSpotifyContext();
 
   useEffect(() => {
     if (!code) return;
@@ -52,7 +53,7 @@ const Dashboard = () => {
     spotifyApi.setAccessToken(accessToken);
 
     spotifyApi.getMe().then(data => {
-      setUserProfileData(data?.body);
+      setSpotifyUserData(data?.body);
     })
   }, [accessToken]);
 
