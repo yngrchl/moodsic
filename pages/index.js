@@ -43,7 +43,9 @@ const Home = () => {
           />
           moodsic
         </h1>
-        <Button href={loginUrl} text="LOG IN WITH SPOTIFY" type="login" />
+        <div style={{ marginTop: '5rem' }}>
+          <Button href={loginUrl} text="LOG IN WITH SPOTIFY" type="login" />
+        </div>
       </main>
 
       <Footer />

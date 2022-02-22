@@ -29,7 +29,7 @@ Button.defaultProps = {
 Button.propTypes = {
   href: PropTypes.string,
   text: PropTypes.string,
-  type: PropTypes.oneOf(["login", "error"]).isRequired,
+  type: PropTypes.oneOf(["login", "error", "submit"]).isRequired,
 };
 
 export default Button;

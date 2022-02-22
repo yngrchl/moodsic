@@ -15,7 +15,9 @@ const Error = () => (
         />
         oops, something went wrong.
       </h1>
-      <Button href={prefixPath("/")} text="TRY AGAIN FROM THE BEGINNING" type="error" />
+      <div style={{ marginTop: '5rem' }}>
+        <Button href={prefixPath("/")} text="TRY AGAIN FROM THE BEGINNING" type="error" />
+      </div>
     </main>
 
     <Footer />

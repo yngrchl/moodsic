@@ -3,9 +3,9 @@ import SpotifyWebApi from "spotify-web-api-node";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Footer from '../components/Footer';
-import Link from 'next/link';
 import { prefixPath } from '../utils/prefix';
-import { useSpotifyContext } from "../contexts/spotifyContext";
+import { useLocalStorage } from "react-use";
+import Button from "../components/Button";
 
 /**
  * Post login page
@@ -13,7 +13,11 @@ import { useSpotifyContext } from "../contexts/spotifyContext";
 const Dashboard = () => {
   const [code, setCode] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
-  const [_, setSpotifyUserData] = useSpotifyContext();
+  const [spotifyUserData, setSpotifyUserData] = useLocalStorage("spotifyUserData", {});
+  const name = spotifyUserData?.display_name
+      ? ` ${spotifyUserData?.display_name}`
+      : "";
+
 
   useEffect(() => {
     if (!code) return;
@@ -59,10 +63,31 @@ const Dashboard = () => {
 
   return (
     <div className="container">
-      <main>
-        <Link href="/blah">
-          <a>About You</a>
-        </Link>
+      <main className="dashboard">
+        <li>
+          <h1>Hi{name}!</h1>
+        </li>
+
+        <li>
+          <h2>Let's set the ~mood~ for today.</h2>
+        </li>
+        <li>
+          <p>
+            Using just a zip code, we'll find a Spotify playlist for you that
+            matches today's weather forecast.
+          </p>
+        </li>
+
+        <li>
+          <form className="zipcode-form">
+            <input
+              inputmode="numeric"
+              placeholder="enter zip code here"
+              required
+            />
+            <Button text="Find me some tunes" type="submit" />
+          </form>
+        </li>
       </main>
 
       <Footer />

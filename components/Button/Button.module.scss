@@ -1,8 +1,14 @@
 .btn {
-    margin-top: 5rem;
     border-radius: 4rem;
     padding: 1rem 2rem;
     border: 1px solid white;
+    display: flex;
+    align-items: center;
+    max-height: 4rem;
+
+    @include at-sm {
+      flex-direction: column;
+    }
 
     &.login {
       background-color: #1DB954;
@@ -11,6 +17,10 @@
     &.error {
       background-color: #ea481eff;
     }
+
+    &.submit {
+      background-color: #0070f3;
+    }
 }
 
 .btn h4 {
@@ -18,7 +28,7 @@
 }
 
 .btn {
-  &.login, &.error {
+  &.login, &.error, &.submit {
     h4 {
       color: white;
     }
@@ -42,5 +52,13 @@
     }
 
     border-color: #a01d1d;
+  }
+
+  &.submit {
+    h4 {
+      color: darkblue;
+    }
+
+    border-color: darkblue;
   }
 }
