@@ -9,7 +9,7 @@ describe('Button', () => {
   });
 
   it('applies href prop as expected', () => {
-    const href = 'test.com';
+    const href = '/test.com';
 
     render(<Button href={href} type="error" />);
 
