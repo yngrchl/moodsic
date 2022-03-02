@@ -36,15 +36,17 @@ const Home = () => {
       </Head>
 
       <main>
-        <h1 className="title">
-          <img
-            src="moodsic-icon.svg"
-            alt="moodsic icon of cloud and sun with sound waves"
-          />
-          moodsic
-        </h1>
-        <div style={{ marginTop: '5rem' }}>
-          <Button href={loginUrl} text="LOG IN WITH SPOTIFY" type="login" />
+        <div className="buffer">
+          <h1 className="title">
+            <img
+              src="moodsic-icon.svg"
+              alt="moodsic icon of cloud and sun with sound waves"
+            />
+            moodsic
+          </h1>
+          <div style={{ marginTop: '5rem' }}>
+            <Button href={loginUrl} text="LOG IN WITH SPOTIFY" type="login" />
+          </div>
         </div>
       </main>
 

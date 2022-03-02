@@ -4,7 +4,9 @@
     border: 1px solid white;
     display: flex;
     align-items: center;
-    max-height: 4rem;
+    justify-content: center;
+    height: 4rem;
+    font-size: 100%;
 
     @include at-sm {
       flex-direction: column;
@@ -60,5 +62,6 @@
     }
 
     border-color: darkblue;
+    cursor: pointer;
   }
 }

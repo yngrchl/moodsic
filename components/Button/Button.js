@@ -23,7 +23,7 @@ const Button = ({ href, text, type }) => {
 
   return(
     <Link href={href}>
-      <a className={cx('btn', type)} type="submit">
+      <a className={cx('btn', type)}>
         <h4>{text}</h4>
       </a>
     </Link>

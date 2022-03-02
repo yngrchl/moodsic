@@ -79,40 +79,38 @@ const Dashboard = () => {
 
   return (
     <div className="container">
-      <main className="dashboard">
-        <li>
-          <h1>Hi{username}!</h1>
-        </li>
+      <main>
+        <div className="buffer">
+          <li>
+            <h1>Hi{username}!</h1>
+          </li>
 
-        <li>
-          <h2>Let's set the ~mood~ for today.</h2>
-        </li>
-        <li>
-          <p>
-            Using just a zip code and a 2-letter country code, we'll find a
-            Spotify playlist for you that matches today's weather forecast.
-          </p>
-        </li>
+          <li>
+            <h2>Let's set the ~mood~ for today.</h2>
+          </li>
+          <li>
+            <p>
+              Using just a zip code and a 2-letter country code, we'll find a
+              few Spotify playlists for you that match today's weather forecast.
+            </p>
+          </li>
 
-        <li>
-          <form className="zipcode-form" onSubmit={submit}>
-            <label htmlFor="zipCode">zip code:</label>
-            <input
-              id="zipCode"
-              placeholder="ie: 90909"
-              required
-            />
-            <label htmlFor="countryCode">2-letter country code:</label>
-            <input
-              id="countryCode"
-              placeholder="ie: US"
-              maxLength="2"
-              className="country"
-              required
-            />
-            <Button text="Find me some tunes" type="submit" />
-          </form>
-        </li>
+          <li>
+            <form className="zipcode-form" onSubmit={submit}>
+              <label htmlFor="zipCode">zip code:</label>
+              <input id="zipCode" placeholder="ie: 90909" required />
+              <label htmlFor="countryCode">2-letter country code:</label>
+              <input
+                id="countryCode"
+                placeholder="ie: US"
+                maxLength="2"
+                className="country"
+                required
+              />
+              <Button text="Find me some tunes" type="submit" />
+            </form>
+          </li>
+        </div>
       </main>
 
       <Footer />

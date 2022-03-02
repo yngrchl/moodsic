@@ -1,15 +1,16 @@
 import Footer from "../components/Footer";
-import useSWR from 'swr';
 import axios from 'axios';
 import { useRouter } from "next/router";
 import { useEffect, useState } from 'react';
 import { useLocalStorage } from "react-use";
 import { prefixPath } from "../utils/prefix";
+import Link from 'next/link';
 
 /**
- * Result page - shows user 6 Spotify playlists
+ * Result page - shows user {SPOTIFY_PLAYLIST_LIMIT} number of Spotify playlists
  */
 const OPEN_WEATHER_BASE_URL = "http://api.openweathermap.org";
+const SPOTIFY_PLAYLIST_LIMIT = 6;
 
 export const getServerSideProps = async () => {
   const openWeatherApiKey = process.env.OPEN_WEATHER_API_KEY;
@@ -34,6 +35,7 @@ const Result = ({ openWeatherApiKey, unsplashPhotosApiKey }) => {
   const [spotifyUserData, _] = useLocalStorage("spotifyUserData", {});
 
   const embedSpotifyUrls = urls => {
+    if (!urls) return [];
     return urls.map((url) =>
       url.replace('/playlist/', '/embed/playlist/')
     )
@@ -45,6 +47,8 @@ const Result = ({ openWeatherApiKey, unsplashPhotosApiKey }) => {
     axios
       .get(latLonAddress)
       .then((response) => {
+        // Given zip code and country code, find lat/lon coordinates
+        // Given lat/lon coordinates, find weather conditions
         const locationData = `${response.data?.name}, ${response.data?.country}`;
         setLocation(locationData);
 
@@ -55,33 +59,39 @@ const Result = ({ openWeatherApiKey, unsplashPhotosApiKey }) => {
         return axios.get(weatherAddress);
       })
       .then((response) => {
+        // Given weather description, find background image and spotify playlists that match
         const weatherData = response.data?.weather[0]?.description;
         setWeather(weatherData);
 
-        const photoBackgroundAddress = `https://api.unsplash.com/search/photos?query=${weatherData}&per_page=1&orientation=landscape&content_filter=high`
+        const backgroundImgAddress = `https://api.unsplash.com/search/photos?query=${weatherData}&per_page=1&orientation=landscape&content_filter=high`;
+        const spotifySearchAddress = `https://api.spotify.com/v1/search?q=${weatherData}&type=playlist&market=${countryCode}&limit=${SPOTIFY_PLAYLIST_LIMIT}`;
 
-        return axios.get(photoBackgroundAddress, {
+        const fetchBackgroundImg = axios.get(backgroundImgAddress, {
           headers: {
             Authorization: `Client-ID ${unsplashPhotosApiKey}`,
           },
-        })
-      })
-      .then((response) => {
-        setBackgroundImgData(response.data?.results[0]?.urls?.full)
-        const spotifySearchAddress = `https://api.spotify.com/v1/search?q=${weather}&type=playlist&market=${countryCode}&limit=6`;
+        });
+        const fetchSpotifyPlaylists = axios.get(spotifySearchAddress, {
+          headers: {
+            Authorization: `Bearer ${spotifyUserData?.accessToken}`,
+          },
+        });
 
-        return axios.get(spotifySearchAddress, {
-                headers: {
-                  'Authorization': `Bearer ${spotifyUserData?.accessToken}`
-                }})
+        return axios.all([fetchBackgroundImg, fetchSpotifyPlaylists]);
       })
-      .then((response) => {
-        const playlistUrls = response.data.playlists.items.map((playlist) =>
-          playlist.external_urls.spotify
+      .then(axios.spread((...responses) => {
+        // Given background image and spotify playlists, render them
+        const backgroundImgResponse = responses[0];
+        setBackgroundImgData(
+          backgroundImgResponse.data?.results[0]?.urls?.full
+        );
+
+        const spotifyPlaylistsResponse = responses[1];
+        const playlistUrls = spotifyPlaylistsResponse.data?.playlists?.items.map((playlist) =>
+          playlist?.external_urls?.spotify
         )
-
         setSpotifyPlaylistUrls(embedSpotifyUrls(playlistUrls))
-      })
+      }))
       .catch((error) => {
         console.log(error)
         //   If failed, show Error page
@@ -111,13 +121,24 @@ const Result = ({ openWeatherApiKey, unsplashPhotosApiKey }) => {
       style={{ backgroundImage: "url(" + backgroundImgData + ")" }}
     >
       <main>
-        <div style={{ backgroundColor: 'white' }}>
+        <div className="text-container">
           <h1>
-            Looks like {location} is experiencing {weather} right now.
+            Looks like <div className="highlight">{location}</div> is
+            experiencing <div className="highlight">{weather}</div> right now.
           </h1>
           <p>
-            Here are 5 Spotify playlists that will set the perfect soundtrack to
-            your life in this moment.
+            Here are {spotifyPlaylistUrls?.length} Spotify playlists that can
+            be the perfect soundtrack to your life in this moment.
+          </p>
+
+          <p className="psst">
+            Want to switch things up? Click{"  "}
+            <Link href={prefixPath("/dashboard")}>
+              <a>
+                <b>here</b>
+              </a>
+            </Link>
+            {" "}to try again with a new location.
           </p>
         </div>
         <div className="playlist-container">
