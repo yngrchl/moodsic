@@ -1,7 +1,8 @@
-import Head from 'next/head'
-import Footer from '../components/Footer'
-import { loginUrl } from "../utils/spotify";
+import Head from 'next/head';
+import Footer from '../components/Footer';
+import { loginUrl } from '../utils/spotify';
 import Button from '../components/Button/Button';
+import Image from 'next/image';
 
 /**
  * Start/Login page
@@ -38,10 +39,14 @@ const Home = () => {
       <main>
         <div className="buffer">
           <h1 className="title">
-            <img
-              src="moodsic-icon.svg"
-              alt="moodsic icon of cloud and sun with sound waves"
-            />
+            <div className="image">
+              <Image
+                src="/moodsic-icon.svg"
+                alt="moodsic icon of cloud and sun with sound waves"
+                width="150px"
+                height="150px"
+              />
+            </div>
             moodsic
           </h1>
           <div style={{ marginTop: '5rem' }}>
@@ -53,6 +58,6 @@ const Home = () => {
       <Footer />
     </div>
   );
-}
+};
 
 export default Home;

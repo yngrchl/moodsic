@@ -1,15 +1,15 @@
-import Footer from "../components/Footer";
+import Footer from '../components/Footer';
 import axios from 'axios';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useLocalStorage } from "react-use";
-import { prefixPath } from "../utils/prefix";
+import { useLocalStorage } from 'react-use';
+import { prefixPath } from '../utils/prefix';
 import Link from 'next/link';
 
 /**
  * Result page - shows user {SPOTIFY_PLAYLIST_LIMIT} number of Spotify playlists
  */
-const OPEN_WEATHER_BASE_URL = "http://api.openweathermap.org";
+const OPEN_WEATHER_BASE_URL = 'http://api.openweathermap.org';
 const SPOTIFY_PLAYLIST_LIMIT = 3;
 
 export const getServerSideProps = async () => {
@@ -19,7 +19,7 @@ export const getServerSideProps = async () => {
   return {
     props: {
       openWeatherApiKey,
-      unsplashPhotosApiKey
+      unsplashPhotosApiKey,
     },
   };
 };
@@ -32,14 +32,12 @@ const Result = ({ openWeatherApiKey, unsplashPhotosApiKey }) => {
   const [weather, setWeather] = useState(null);
   const [spotifyPlaylistUrls, setSpotifyPlaylistUrls] = useState(null);
   const [backgroundImgData, setBackgroundImgData] = useState(null);
-  const [spotifyUserData, _] = useLocalStorage("spotifyUserData", {});
+  const [spotifyUserData, _] = useLocalStorage('spotifyUserData', {});
 
-  const embedSpotifyUrls = urls => {
+  const embedSpotifyUrls = (urls) => {
     if (!urls) return [];
-    return urls.map((url) =>
-      url.replace('/playlist/', '/embed/playlist/')
-    )
-  }
+    return urls.map((url) => url.replace('/playlist/', '/embed/playlist/'));
+  };
 
   const latLonAddress = `${OPEN_WEATHER_BASE_URL}/geo/1.0/zip?zip=${zipCode},${countryCode}&appid=${openWeatherApiKey}`;
 
@@ -79,46 +77,54 @@ const Result = ({ openWeatherApiKey, unsplashPhotosApiKey }) => {
 
         return axios.all([fetchBackgroundImg, fetchSpotifyPlaylists]);
       })
-      .then(axios.spread((...responses) => {
-        // Given background image and spotify playlists, render them
-        const backgroundImgResponse = responses[0];
-        setBackgroundImgData(
-          backgroundImgResponse.data?.results[0]?.urls?.full
-        );
+      .then(
+        axios.spread((...responses) => {
+          // Given background image and spotify playlists, render them
+          const backgroundImgResponse = responses[0];
+          setBackgroundImgData(
+            backgroundImgResponse.data?.results[0]?.urls?.full,
+          );
 
-        const spotifyPlaylistsResponse = responses[1];
-        const playlistUrls = spotifyPlaylistsResponse.data?.playlists?.items.map((playlist) =>
-          playlist?.external_urls?.spotify
-        )
-        setSpotifyPlaylistUrls(embedSpotifyUrls(playlistUrls))
-      }))
+          const spotifyPlaylistsResponse = responses[1];
+          const playlistUrls =
+            spotifyPlaylistsResponse.data?.playlists?.items.map(
+              (playlist) => playlist?.external_urls?.spotify,
+            );
+          setSpotifyPlaylistUrls(embedSpotifyUrls(playlistUrls));
+        }),
+      )
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         //   If failed, show Error page
-        window.location = prefixPath("/error");
+        window.location = prefixPath('/error');
       });
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const renderSpotifyPlaylistWidgets = () => {
-    if (!spotifyPlaylistUrls) {return ''}
+    if (!spotifyPlaylistUrls) {
+      return '';
+    }
 
     return spotifyPlaylistUrls.map((url, i) => {
-      return <iframe
-        src={url}
-        width="300"
-        height="380"
-        frameBorder="0"
-        allowtransparency="true"
-        allow="encrypted-media"
-        key={i}
-      ></iframe>
+      return (
+        <iframe
+          src={url}
+          width="300"
+          height="380"
+          frameBorder="0"
+          allowtransparency="true"
+          allow="encrypted-media"
+          key={i}
+        ></iframe>
+      );
     });
-  }
+  };
 
   return (
     <div
       className="container"
-      style={{ backgroundImage: "url(" + backgroundImgData + ")" }}
+      style={{ backgroundImage: 'url(' + backgroundImgData + ')' }}
     >
       <main>
         <div className="text-container">
@@ -127,18 +133,18 @@ const Result = ({ openWeatherApiKey, unsplashPhotosApiKey }) => {
             experiencing <div className="highlight">{weather}</div> right now.
           </h1>
           <p>
-            Here are {spotifyPlaylistUrls?.length} Spotify playlists that can
-            be the perfect soundtrack to your life in this moment.
+            Here are {spotifyPlaylistUrls?.length} Spotify playlists that can be
+            the perfect soundtrack to your life in this moment.
           </p>
 
           <p className="psst">
-            Want to switch things up? Click{"  "}
-            <Link href={prefixPath("/dashboard")}>
+            Want to switch things up? Click{'  '}
+            <Link href={prefixPath('/dashboard')}>
               <a>
                 <b>here</b>
               </a>
-            </Link>
-            {" "}to try again with a new location.
+            </Link>{' '}
+            to try again with a new location.
           </p>
         </div>
         <div className="playlist-container">
@@ -149,6 +155,6 @@ const Result = ({ openWeatherApiKey, unsplashPhotosApiKey }) => {
       <Footer />
     </div>
   );
-};;
+};
 
 export default Result;

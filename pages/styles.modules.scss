@@ -57,15 +57,11 @@ footer {
     background-color: white;
 }
 
-footer img {
-    margin-left: 0.5rem;
-    height: 1rem;
-}
-
 footer a {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 0.5rem;
 }
 
 a {
@@ -98,8 +94,7 @@ a {
     font-size: 4rem;
 }
 
-.title img {
-    width: 5rem;
+.image {
     display: block;
     margin: auto;
 }

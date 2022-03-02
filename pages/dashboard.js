@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import SpotifyWebApi from "spotify-web-api-node";
-import { useRouter } from "next/router";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import SpotifyWebApi from 'spotify-web-api-node';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 import Footer from '../components/Footer';
 import { prefixPath } from '../utils/prefix';
-import { useLocalStorage } from "react-use";
-import Button from "../components/Button";
+import { useLocalStorage } from 'react-use';
+import Button from '../components/Button';
 
 /**
  * Post login page
@@ -13,31 +13,30 @@ import Button from "../components/Button";
 const Dashboard = () => {
   const [code, setCode] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
-  const [spotifyUserData, setSpotifyUserData] = useLocalStorage("spotifyUserData", {});
-  const [username, setUsername] = useState("");
+  const [spotifyUserData, setSpotifyUserData] = useLocalStorage(
+    'spotifyUserData',
+    {},
+  );
+  const [username, setUsername] = useState('');
   const router = useRouter();
 
   useEffect(() => {
     if (!code) return;
 
     axios
-      .post(prefixPath("/api/login"), { code })
+      .post(prefixPath('/api/login'), { code })
       .then((response) => {
         // If successful, remove code string from URL
         // and return accessToken
-        window.history.pushState({}, null, prefixPath("/dashboard"));
+        window.history.pushState({}, null, prefixPath('/dashboard'));
 
         setAccessToken(response.data.accessToken);
       })
       .catch(() => {
         //   If failed, show Error page
-        window.location = prefixPath("/error");
+        window.location = prefixPath('/error');
       });
   }, [code]);
-
-  const spotifyApi = new SpotifyWebApi({
-    clientId: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID,
-  });
 
   const { query } = useRouter();
 
@@ -52,30 +51,34 @@ const Dashboard = () => {
   useEffect(() => {
     if (!accessToken) return;
 
+    const spotifyApi = new SpotifyWebApi({
+      clientId: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID,
+    });
+
     spotifyApi.setAccessToken(accessToken);
 
-    spotifyApi.getMe().then(data => {
+    spotifyApi.getMe().then((data) => {
       const spotifyData = data?.body;
       spotifyData.accessToken = accessToken;
 
       setSpotifyUserData(spotifyData);
-    })
-  }, [accessToken]);
+    });
+  }, [accessToken, setSpotifyUserData]);
 
   useEffect(() => {
-    setUsername(` ${spotifyUserData?.display_name}`)
-  }, [spotifyUserData?.display_name])
+    setUsername(` ${spotifyUserData?.display_name}`);
+  }, [spotifyUserData?.display_name]);
 
-  const submit = async e => {
+  const submit = async (e) => {
     e.preventDefault();
     router.push({
-      pathname: prefixPath("/result"),
+      pathname: prefixPath('/result'),
       query: {
         zipCode: e.target?.zipCode?.value,
         countryCode: e.target?.countryCode?.value,
       },
     });
-  }
+  };
 
   return (
     <div className="container">
@@ -86,12 +89,13 @@ const Dashboard = () => {
           </li>
 
           <li>
-            <h2>Let's set the ~mood~ for today.</h2>
+            <h2>Let&apos;s set the ~mood~ for today.</h2>
           </li>
           <li>
             <p>
-              Using just a zip code and a 2-letter country code, we'll find a
-              few Spotify playlists for you that match today's weather forecast.
+              Using just a zip code and a 2-letter country code, we&apos;ll find
+              a few Spotify playlists for you that match today&apos;s weather
+              forecast.
             </p>
           </li>
 
@@ -116,6 +120,6 @@ const Dashboard = () => {
       <Footer />
     </div>
   );
-}
+};
 
 export default Dashboard;
