@@ -4,7 +4,7 @@ import { loginUrl } from "../utils/spotify";
 import Button from '../components/Button/Button';
 
 /**
- * Home/login page
+ * Start/Login page
  */
 const Home = () => {
   return (

@@ -5,6 +5,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+        background-image: url("https://images.unsplash.com/photo-1478502083033-10df98099a02?crop=entropy&cs=srgb&fm=jpg&ixid=MnwzMDY1Mjl8MHwxfHNlYXJjaHwxfHxvdmVyY2FzdCUyMGNsb3Vkc3xlbnwxfDB8fHwxNjQ2MTkyNDM3&ixlib=rb-1.2.1&q=85");
+
 }
 
 main {
@@ -39,6 +41,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: white;
 }
 
 footer img {
@@ -195,6 +198,13 @@ label {
     100% {
         opacity: 1;
      }
+}
+
+.playlist-container {
+    display: grid;
+    grid-template-columns: 20rem 20rem 20rem;
+    grid-template-rows: auto;
+    row-gap: 2rem;
 }
 
 @media (max-width: 600px) {
