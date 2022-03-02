@@ -14,10 +14,8 @@ const Dashboard = () => {
   const [code, setCode] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
   const [spotifyUserData, setSpotifyUserData] = useLocalStorage("spotifyUserData", {});
-  const name = spotifyUserData?.display_name
-      ? ` ${spotifyUserData?.display_name}`
-      : "";
-
+  const [username, setUsername] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     if (!code) return;
@@ -57,15 +55,33 @@ const Dashboard = () => {
     spotifyApi.setAccessToken(accessToken);
 
     spotifyApi.getMe().then(data => {
-      setSpotifyUserData(data?.body);
+      const spotifyData = data?.body;
+      spotifyData.accessToken = accessToken;
+
+      setSpotifyUserData(spotifyData);
     })
   }, [accessToken]);
+
+  useEffect(() => {
+    setUsername(` ${spotifyUserData?.display_name}`)
+  }, [spotifyUserData?.display_name])
+
+  const submit = async e => {
+    e.preventDefault();
+    router.push({
+      pathname: prefixPath("/result"),
+      query: {
+        zipCode: e.target?.zipCode?.value,
+        countryCode: e.target?.countryCode?.value,
+      },
+    });
+  }
 
   return (
     <div className="container">
       <main className="dashboard">
         <li>
-          <h1>Hi{name}!</h1>
+          <h1>Hi{username}!</h1>
         </li>
 
         <li>
@@ -73,16 +89,25 @@ const Dashboard = () => {
         </li>
         <li>
           <p>
-            Using just a zip code, we'll find a Spotify playlist for you that
-            matches today's weather forecast.
+            Using just a zip code and a 2-letter country code, we'll find a
+            Spotify playlist for you that matches today's weather forecast.
           </p>
         </li>
 
         <li>
-          <form className="zipcode-form">
+          <form className="zipcode-form" onSubmit={submit}>
+            <label htmlFor="zipCode">zip code:</label>
             <input
-              inputmode="numeric"
-              placeholder="enter zip code here"
+              id="zipCode"
+              placeholder="ie: 90909"
+              required
+            />
+            <label htmlFor="countryCode">2-letter country code:</label>
+            <input
+              id="countryCode"
+              placeholder="ie: US"
+              maxLength="2"
+              className="country"
               required
             />
             <Button text="Find me some tunes" type="submit" />

@@ -159,10 +159,6 @@ code {
     align-items: center;
     margin-top: 2rem;
     flex-direction: column;
-
-    @include at-sm {
-        flex-direction: row;
-    }
 }
 
 input {
@@ -174,15 +170,22 @@ input {
     padding: 1rem;
     margin-bottom: 1rem;
     border-radius: 1rem;
+    text-align: center;
 
-    @include at-sm {
-        margin: 0 1rem 0 0;
+    &.country {
+        max-width: 40%;
+        text-transform: uppercase;
     }
+}
+
+label {
+    padding-bottom: 0.25rem;
 }
 
 ::placeholder {
     opacity: 0.75;
     text-align: center;
+    text-transform: none;
 }
 
 @keyframes fadeInAnimation {

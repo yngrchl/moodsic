@@ -13,9 +13,17 @@ import Link from 'next/link';
 const Button = ({ href, text, type }) => {
   const cx = classNames.bind(styles);
 
+  if (type === "submit") {
+    return (
+      <button className={cx("btn", type)} type="submit">
+        <h4>{text}</h4>
+      </button>
+    );
+  }
+
   return(
     <Link href={href}>
-      <a className={cx('btn', type)}>
+      <a className={cx('btn', type)} type="submit">
         <h4>{text}</h4>
       </a>
     </Link>
