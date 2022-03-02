@@ -1,4 +1,4 @@
-import spotifyWebApi from 'spotify-web-api-node';
+import spotifyWebApi from "spotify-web-api-node";
 
 /**
  * Given a code returned from Spotify auth,
@@ -6,8 +6,8 @@ import spotifyWebApi from 'spotify-web-api-node';
  * so we can personalize search results.
  */
 const login = async (req, res) => {
-  if (req.method !== 'POST') {
-    res.status(400).send({ message: 'Only POST requests allowed' });
+  if (req.method !== "POST") {
+    res.status(400).send({ message: "Only POST requests allowed" });
     return;
   }
 

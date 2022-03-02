@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import SpotifyWebApi from 'spotify-web-api-node';
-import { useRouter } from 'next/router';
-import axios from 'axios';
-import Footer from '../components/Footer';
-import { prefixPath } from '../utils/prefix';
-import { useLocalStorage } from 'react-use';
-import Button from '../components/Button';
+import React, { useState, useEffect } from "react";
+import SpotifyWebApi from "spotify-web-api-node";
+import { useRouter } from "next/router";
+import axios from "axios";
+import Footer from "../components/Footer";
+import { prefixPath } from "../utils/prefix";
+import { useLocalStorage } from "react-use";
+import Button from "../components/Button";
 
 /**
  * Post login page
@@ -14,27 +14,27 @@ const Dashboard = () => {
   const [code, setCode] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
   const [spotifyUserData, setSpotifyUserData] = useLocalStorage(
-    'spotifyUserData',
-    {},
+    "spotifyUserData",
+    {}
   );
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState("");
   const router = useRouter();
 
   useEffect(() => {
     if (!code) return;
 
     axios
-      .post(prefixPath('/api/login'), { code })
+      .post(prefixPath("/api/login"), { code })
       .then((response) => {
         // If successful, remove code string from URL
         // and return accessToken
-        window.history.pushState({}, null, prefixPath('/dashboard'));
+        window.history.pushState({}, null, prefixPath("/dashboard"));
 
         setAccessToken(response.data.accessToken);
       })
       .catch(() => {
         //   If failed, show Error page
-        window.location = prefixPath('/error');
+        window.location = prefixPath("/error");
       });
   }, [code]);
 
@@ -72,7 +72,7 @@ const Dashboard = () => {
   const submit = async (e) => {
     e.preventDefault();
     router.push({
-      pathname: prefixPath('/result'),
+      pathname: prefixPath("/result"),
       query: {
         zipCode: e.target?.zipCode?.value,
         countryCode: e.target?.countryCode?.value,

@@ -1,28 +1,28 @@
 .btn {
-    border-radius: 4rem;
-    padding: 1rem 2rem;
-    border: 1px solid white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 4rem;
-    font-size: 100%;
+  border-radius: 4rem;
+  padding: 1rem 2rem;
+  border: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4rem;
+  font-size: 100%;
 
-    @include at-sm {
-      flex-direction: column;
-    }
+  @include at-sm {
+    flex-direction: column;
+  }
 
-    &.login {
-      background-color: #1DB954;
-    }
+  &.login {
+    background-color: #1db954;
+  }
 
-    &.error {
-      background-color: #ea481eff;
-    }
+  &.error {
+    background-color: #ea481eff;
+  }
 
-    &.submit {
-      background-color: #0070f3;
-    }
+  &.submit {
+    background-color: #0070f3;
+  }
 }
 
 .btn h4 {
@@ -30,7 +30,9 @@
 }
 
 .btn {
-  &.login, &.error, &.submit {
+  &.login,
+  &.error,
+  &.submit {
     h4 {
       color: white;
     }

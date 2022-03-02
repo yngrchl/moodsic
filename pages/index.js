@@ -1,8 +1,9 @@
-import Head from 'next/head';
-import Footer from '../components/Footer';
-import { loginUrl } from '../utils/spotify';
-import Button from '../components/Button/Button';
-import Image from 'next/image';
+import React from "react";
+import Head from "next/head";
+import Footer from "../components/Footer";
+import { loginUrl } from "../utils/spotify";
+import Button from "../components/Button/Button";
+import Image from "next/image";
 
 /**
  * Start/Login page
@@ -49,7 +50,7 @@ const Home = () => {
             </div>
             moodsic
           </h1>
-          <div style={{ marginTop: '5rem' }}>
+          <div style={{ marginTop: "5rem" }}>
             <Button href={loginUrl} text="LOG IN WITH SPOTIFY" type="login" />
           </div>
         </div>
