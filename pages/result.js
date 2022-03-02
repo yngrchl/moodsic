@@ -95,9 +95,9 @@ const Result = ({ openWeatherApiKey, unsplashPhotosApiKey }) => {
           setSpotifyPlaylistUrls(embedSpotifyUrls(playlistUrls));
         })
       )
-      .catch((error) => {
-        console.log(error);
-        //   If failed, show Error page
+      .catch(() => {
+        //   If failed, clear local storage and show Error page
+        localStorage.clear();
         window.location = prefixPath('/error');
       });
   }, []);

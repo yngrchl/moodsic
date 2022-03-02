@@ -33,7 +33,8 @@ const Dashboard = () => {
         setAccessToken(response.data.accessToken);
       })
       .catch(() => {
-        //   If failed, show Error page
+        //   If failed, clear local storage and show Error page
+        localStorage.clear();
         window.location = prefixPath('/error');
       });
   }, [code]);
