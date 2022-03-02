@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames/bind";
-import styles from "./Button.module.scss";
-import Link from "next/link";
+import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames/bind';
+import styles from './Button.module.scss';
+import Link from 'next/link';
 
 /**
  * Generic button
@@ -13,9 +13,9 @@ import Link from "next/link";
 const Button = ({ href, text, type }) => {
   const cx = classNames.bind(styles);
 
-  if (type === "submit") {
+  if (type === 'submit') {
     return (
-      <button className={cx("btn", type)} type="submit">
+      <button className={cx('btn', type)} type="submit">
         <h4>{text}</h4>
       </button>
     );
@@ -23,7 +23,7 @@ const Button = ({ href, text, type }) => {
 
   return (
     <Link href={href}>
-      <a className={cx("btn", type)}>
+      <a className={cx('btn', type)}>
         <h4>{text}</h4>
       </a>
     </Link>
@@ -31,14 +31,14 @@ const Button = ({ href, text, type }) => {
 };
 
 Button.defaultProps = {
-  href: "#",
-  text: "",
+  href: '#',
+  text: '',
 };
 
 Button.propTypes = {
   href: PropTypes.string,
   text: PropTypes.string,
-  type: PropTypes.oneOf(["login", "error", "submit"]).isRequired,
+  type: PropTypes.oneOf(['login', 'error', 'submit']).isRequired,
 };
 
 export default Button;

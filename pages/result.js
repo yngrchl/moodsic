@@ -1,17 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Footer from "../components/Footer";
-import axios from "axios";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useLocalStorage } from "react-use";
-import { prefixPath } from "../utils/prefix";
-import Link from "next/link";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Footer from '../components/Footer';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useLocalStorage } from 'react-use';
+import { prefixPath } from '../utils/prefix';
+import Link from 'next/link';
 
 /**
  * Result page - shows user {SPOTIFY_PLAYLIST_LIMIT} number of Spotify playlists
  */
-const OPEN_WEATHER_BASE_URL = "http://api.openweathermap.org";
+const OPEN_WEATHER_BASE_URL = 'http://api.openweathermap.org';
 const SPOTIFY_PLAYLIST_LIMIT = 3;
 
 export const getServerSideProps = async () => {
@@ -34,11 +34,11 @@ const Result = ({ openWeatherApiKey, unsplashPhotosApiKey }) => {
   const [weather, setWeather] = useState(null);
   const [spotifyPlaylistUrls, setSpotifyPlaylistUrls] = useState(null);
   const [backgroundImgData, setBackgroundImgData] = useState(null);
-  const [spotifyUserData] = useLocalStorage("spotifyUserData", {});
+  const [spotifyUserData] = useLocalStorage('spotifyUserData', {});
 
   const embedSpotifyUrls = (urls) => {
     if (!urls) return [];
-    return urls.map((url) => url.replace("/playlist/", "/embed/playlist/"));
+    return urls.map((url) => url.replace('/playlist/', '/embed/playlist/'));
   };
 
   const latLonAddress = `${OPEN_WEATHER_BASE_URL}/geo/1.0/zip?zip=${zipCode},${countryCode}&appid=${openWeatherApiKey}`;
@@ -98,13 +98,13 @@ const Result = ({ openWeatherApiKey, unsplashPhotosApiKey }) => {
       .catch((error) => {
         console.log(error);
         //   If failed, show Error page
-        window.location = prefixPath("/error");
+        window.location = prefixPath('/error');
       });
   }, []);
 
   const renderSpotifyPlaylistWidgets = () => {
     if (!spotifyPlaylistUrls) {
-      return "";
+      return '';
     }
 
     return spotifyPlaylistUrls.map((url, i) => {
@@ -125,7 +125,7 @@ const Result = ({ openWeatherApiKey, unsplashPhotosApiKey }) => {
   return (
     <div
       className="container"
-      style={{ backgroundImage: "url(" + backgroundImgData + ")" }}
+      style={{ backgroundImage: 'url(' + backgroundImgData + ')' }}
     >
       <main>
         <div className="text-container">
@@ -139,12 +139,12 @@ const Result = ({ openWeatherApiKey, unsplashPhotosApiKey }) => {
           </p>
 
           <p className="psst">
-            Want to switch things up? Click{"  "}
-            <Link href={prefixPath("/dashboard")}>
+            Want to switch things up? Click{'  '}
+            <Link href={prefixPath('/dashboard')}>
               <a>
                 <b>here</b>
               </a>
-            </Link>{" "}
+            </Link>{' '}
             to try again with a new location.
           </p>
         </div>
