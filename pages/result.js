@@ -11,7 +11,7 @@ import Link from 'next/link';
 /**
  * Result page - shows user {SPOTIFY_PLAYLIST_LIMIT} number of Spotify playlists
  */
-const OPEN_WEATHER_BASE_URL = 'http://api.openweathermap.org';
+const OPEN_WEATHER_BASE_URL = 'https://api.openweathermap.org';
 const SPOTIFY_PLAYLIST_LIMIT = 3;
 
 export const getServerSideProps = async () => {
