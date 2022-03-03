@@ -117,6 +117,7 @@ const Result = ({ openWeatherApiKey, unsplashPhotosApiKey }) => {
           allowtransparency="true"
           allow="encrypted-media"
           key={i}
+          className="playlist-widget"
         ></iframe>
       );
     });
