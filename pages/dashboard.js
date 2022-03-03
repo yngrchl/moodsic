@@ -67,7 +67,9 @@ const Dashboard = () => {
   }, [accessToken, setSpotifyUserData]);
 
   useEffect(() => {
-    setUsername(` ${spotifyUserData?.display_name}`);
+    if (spotifyUserData?.display_name) {
+      setUsername(` ${spotifyUserData?.display_name}`);
+    }
   }, [spotifyUserData?.display_name]);
 
   const submit = async (e) => {
