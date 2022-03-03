@@ -4,11 +4,6 @@ import Error from '../pages/error';
 import { prefixPath } from '../utils/prefix';
 
 describe('Error', () => {
-  it('renders Error page unchanged', () => {
-    const { container } = render(<Error />);
-    expect(container).toMatchSnapshot();
-  });
-
   it('renders a heading', () => {
     render(<Error />);
 
@@ -24,7 +19,10 @@ describe('Error', () => {
 
     const button = screen.getByText('TRY AGAIN FROM THE BEGINNING').closest('a');
 
+    const path = prefixPath('/');
+    const formattedPath = path === '/' ? path : path.replace(/\/$/, '');
+
     expect(button).toBeInTheDocument();
-    expect(button).toHaveAttribute('href', prefixPath('/'));
+    expect(button).toHaveAttribute('href', formattedPath);
   });
 });

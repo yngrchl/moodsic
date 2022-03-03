@@ -45,7 +45,7 @@ exports[`Home renders Homepage unchanged 1`] = `
         >
           <a
             class="btn login"
-            href="https://accounts.spotify.com/authorize?client_id=undefined&response_type=code&redirect_uri=undefined&show_dialog=true&scope=playlist-modify-private%20playlist-read-collaborative%20playlist-read-private%20user-top-read"
+            href="https://accounts.spotify.com/authorize?client_id=undefined&response_type=code&redirect_uri=undefined&show_dialog=true&scope=user-read-private%20user-read-email"
           >
             <h4>
               LOG IN WITH SPOTIFY
