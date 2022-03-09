@@ -6,7 +6,6 @@
     "build": "next build",
     "start": "next start",
     "test": "jest",
-    "export": "next export",
     "lint": "npx eslint components pages",
     "lint:fix": "npm run lint -- --fix",
     "prettier": "npx prettier components pages --check",
