@@ -141,9 +141,7 @@ const Result = ({ openWeatherApiKey, unsplashPhotosApiKey }) => {
 
           <p className="psst">
             Want to switch things up? Click{'  '}
-            <Link
-              href={{ pathname: '/dashboard', query: { revisit: true } }}
-            >
+            <Link href={{ pathname: '/dashboard', query: { revisit: true } }}>
               <a>
                 <b>here</b>
               </a>
