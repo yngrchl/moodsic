@@ -19,17 +19,22 @@ main {
 
   li {
     list-style: none;
-    animation: fadeInAnimation 1s ease-in both;
   }
 
-  li:nth-child(2) {
-    animation-delay: 1s;
-  }
-  li:nth-child(3) {
-    animation-delay: 2s;
-  }
-  li:nth-child(4) {
-    animation-delay: 3s;
+  &.first {
+    li {
+      animation: fadeInAnimation 1s ease-in both;
+    }
+
+    li:nth-child(2) {
+      animation-delay: 1s;
+    }
+    li:nth-child(3) {
+      animation-delay: 2s;
+    }
+    li:nth-child(4) {
+      animation-delay: 3s;
+    }
   }
 
   @include at-sm {

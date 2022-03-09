@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import { prefixPath } from '../utils/prefix';
 import { useLocalStorage } from 'react-use';
 import Button from '../components/Button';
+import cx from 'classnames';
 
 /**
  * Post login page
@@ -83,9 +84,11 @@ const Dashboard = () => {
     });
   };
 
+  const firstVisit = !query.revisit;
+
   return (
     <div className="container">
-      <main>
+      <main className={cx('', { first: firstVisit })}>
         <div className="buffer">
           <li>
             <h1>Hi{username}!</h1>
